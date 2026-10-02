@@ -20,8 +20,8 @@ export default defineConfig({
 			}),
 			paths: {
 				base: process.argv.includes('dev')
-					? '/softmarmot'
-					: ((process.env.BASE_PATH ?? '/softmarmot') as '/softmarmot' | `/${string}`)
+					? '/'
+					: ((process.env.BASE_PATH ?? '') as '' | `/${string}`)
 			},
 		})
 	]
