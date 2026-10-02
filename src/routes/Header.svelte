@@ -6,7 +6,7 @@ const items = ['home', 'work', 'services', 'about', 'contact'];
 let menuOpen = $state(false);
 </script>
 
-<header class="relative mt-6 mb-12 lg:mt-12 lg:mb-24">
+<header class="relative mt-6 mb-12 lg:mt-12">
     <div class="flex justify-between items-center">
         <h1 class="text-2xl sm:text-3xl"><span class="text-indigo-400">SOFT</span>MARMOT</h1>
 
