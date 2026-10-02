@@ -19,7 +19,7 @@ export default defineConfig({
 				fallback: '404.html'
 			}),
 			paths: {
-				base: ''
+				base: process.argv.includes('dev') ? '' : (process.env.BASE_PATH ?? '')
 			},
 		})
 	]
