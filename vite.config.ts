@@ -19,7 +19,9 @@ export default defineConfig({
 				fallback: '404.html'
 			}),
 			paths: {
-				base: process.argv.includes('dev') ? '/softmarmot' : (process.env.BASE_PATH ?? '/softmarmot')
+				base: process.argv.includes('dev')
+					? '/softmarmot'
+					: ((process.env.BASE_PATH ?? '/softmarmot') as '/softmarmot' | `/${string}`)
 			},
 		})
 	]
