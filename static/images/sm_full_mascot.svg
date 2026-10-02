@@ -32,8 +32,41 @@
      inkscape:window-x="0"
      inkscape:window-y="33"
      inkscape:window-maximized="0"
-     inkscape:current-layer="SoftMarmot" /><defs
-     id="defs1" /><g
+     inkscape:current-layer="SoftMarmot" /><defs id="defs1">
+  <filter id="neon" filterUnits="userSpaceOnUse"
+          x="-60" y="-60" width="360" height="420"
+          color-interpolation-filters="sRGB">
+  <feFlood flood-color="rgb(129,140,248)" result="color"/>
+
+      <!-- tight halo -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="b1"/>
+      <feComponentTransfer in="b1" result="a1">
+    <feFuncA type="linear" slope="0.7"/>
+  </feComponentTransfer>
+      <feComposite in="color" in2="a1" operator="in" result="g1"/>
+
+      <!-- medium glow -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="b2"/>
+      <feComponentTransfer in="b2" result="a2">
+    <feFuncA type="linear" slope="1.3"/>
+  </feComponentTransfer>
+      <feComposite in="color" in2="a2" operator="in" result="g2"/>
+
+      <!-- wide soft bloom -->
+      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="b3"/>
+      <feComponentTransfer in="b3" result="a3">
+    <feFuncA type="linear" slope="2"/>
+  </feComponentTransfer>
+      <feComposite in="color" in2="a3" operator="in" result="g3"/>
+
+      <feMerge>
+    <feMergeNode in="g3"/>
+          <feMergeNode in="g2"/>
+          <feMergeNode in="g1"/>
+          <feMergeNode in="SourceGraphic"/>
+  </feMerge>
+</filter>
+</defs><g
      inkscape:label="SoftMarmot"
      inkscape:groupmode="layer"
      id="SoftMarmot"
@@ -155,10 +188,7 @@
 #head, #hand-left, #hand-right, #bottom {
     --p: calc(var(--lit) * var(--sag));
     opacity: calc((0.1 + 0.9 * var(--p)) * var(--hum));
-    filter:
-        drop-shadow(0 0 calc(1px + 1px * var(--p))  rgb(var(--glow) / calc(0.95 * var(--p))))
-        drop-shadow(0 0 calc(2px + 4px * var(--p))  rgb(var(--glow) / calc(0.8  * var(--p))))
-        drop-shadow(0 0 calc(4px + 10px * var(--p)) rgb(var(--glow) / calc(0.5  * var(--p))));
+    filter: url(#neon);
 }
 
 /* per-section personality: --t0 = when it strikes on, then its own flicker rhythm */
