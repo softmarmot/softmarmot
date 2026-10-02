@@ -1,0 +1,6 @@
+@import url('https://googleapis.com');
+@import 'tailwindcss';
+
+@theme {
+    --font-kode: "Kode Mono", monospace;
+}
