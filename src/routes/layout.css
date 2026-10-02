@@ -4,3 +4,9 @@
 @theme {
     --font-kode: "Kode Mono", monospace;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}

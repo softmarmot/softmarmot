@@ -1,7 +1,8 @@
 <script lang="ts">
 import NavItem from "$lib/components/NavItem.svelte";
 
-const items = ['home', 'work', 'services', 'about', 'contact'];
+// 'work' is hidden until there are projects to show
+const items = ['home', 'services', 'about', 'contact'];
 
 let menuOpen = $state(false);
 </script>
@@ -12,7 +13,7 @@ let menuOpen = $state(false);
 
         <ul class="hidden lg:flex gap-8 text-lg">
             {#each items as item (item)}
-                <NavItem>{item}</NavItem>
+                <NavItem href="#{item}">{item}</NavItem>
             {/each}
         </ul>
 
@@ -34,7 +35,7 @@ let menuOpen = $state(false);
                 class="lg:hidden absolute inset-x-0 top-full z-10 mt-4 flex flex-col gap-4 border border-white/10 bg-slate-800 p-5 text-lg shadow-lg"
         >
             {#each items as item (item)}
-                <NavItem onclick={() => (menuOpen = false)}>{item}</NavItem>
+                <NavItem href="#{item}" onclick={() => (menuOpen = false)}>{item}</NavItem>
             {/each}
         </ul>
     {/if}

@@ -6,13 +6,21 @@
         children,
         class: className = '',
         type = 'button',
+        href,
         ...rest
-    }: HTMLButtonAttributes & { children: Snippet } = $props();
+    }: HTMLButtonAttributes & { children: Snippet; href?: string } = $props();
 </script>
 
-<button {type} class="neon-button cursor-pointer px-4 py-2 {className}" {...rest}>
+<!-- Renders a link when `href` is given, otherwise a button -->
+<svelte:element
+        this={href ? 'a' : 'button'}
+        {href}
+        type={href ? undefined : type}
+        class="neon-button inline-block cursor-pointer px-4 py-2 {className}"
+        {...rest}
+>
     {@render children()}
-</button>
+</svelte:element>
 
 <style>
     /* Registering the variable lets the browser animate it as a number */
