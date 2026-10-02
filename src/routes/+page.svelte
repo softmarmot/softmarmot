@@ -3,9 +3,9 @@
     import NeonButton from '$lib/components/NeonButton.svelte';
 </script>
 
-<div class="flex flex-row py-24">
-    <div class="flex basis-1/2 flex-col gap-4">
-        <h1 class="text-4xl font-medium">
+<div class="flex flex-col gap-12 py-8 md:flex-row md:gap-8 md:py-24">
+    <div class="flex md:basis-1/2 flex-col gap-4">
+        <h1 class="text-3xl sm:text-4xl font-medium">
             <span class="text-indigo-400">Websites</span> for businesses that want to be
             <span class="text-indigo-400">taken seriously</span>
         </h1>
@@ -17,7 +17,8 @@
             Start a project →
         </NeonButton>
     </div>
-    <div class="flex basis-1/2 justify-end">
-        <Mascot />
+    <div class="flex md:basis-1/2 items-center justify-center">
+        <!-- The SVG's viewBox has 30 units of empty padding above the drawing (~9% of its height); shift it up to compensate -->
+        <Mascot class="h-72 sm:h-96 md:h-[26rem] lg:h-[30rem] md:-translate-y-[9%]" />
     </div>
 </div>
