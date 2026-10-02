@@ -9,6 +9,7 @@
 </script>
 
 <svelte:head>
+    <title>SoftMarmot LLC</title>
     <link rel="icon" href={favicon}/>
 </svelte:head>
 
