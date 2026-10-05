@@ -2,6 +2,7 @@
     import Mascot from '$lib/components/Mascot.svelte';
     import NeonButton from '$lib/components/NeonButton.svelte';
     import Services from './Services.svelte';
+    import Work from './Work.svelte';
     import About from './About.svelte';
     import Contact from './Contact.svelte';
 </script>
@@ -30,5 +31,6 @@
 </section>
 
 <Services />
+<Work />
 <About />
 <Contact />

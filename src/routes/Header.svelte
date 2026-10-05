@@ -2,8 +2,7 @@
 import { fade, slide } from 'svelte/transition';
 import NavItem from "$lib/components/NavItem.svelte";
 
-// 'work' is hidden until there are projects to show
-const items = ['home', 'services', 'about', 'contact'];
+const items = ['home', 'services', 'work', 'about', 'contact'];
 
 let menuOpen = $state(false);
 
