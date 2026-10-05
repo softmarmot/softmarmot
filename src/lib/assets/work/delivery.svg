@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" overflow="visible" aria-hidden="true">
+<defs>
+  <filter id="neon-delivery" filterUnits="userSpaceOnUse" x="-20" y="-20" width="200" height="200" color-interpolation-filters="sRGB">
+    <feFlood flood-color="rgb(129,140,248)" result="color"/>
+    <feColorMatrix in="SourceGraphic" type="matrix" result="bright" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.667 0.667 0.667 0 -0.85"/>
+    <feComposite in="bright" in2="SourceAlpha" operator="in" result="lit"/>
+    <feGaussianBlur in="lit" stdDeviation="1.5" result="b1"/>
+    <feComponentTransfer in="b1" result="a1"><feFuncA type="linear" slope="0.7"/></feComponentTransfer>
+    <feComposite in="color" in2="a1" operator="in" result="g1"/>
+    <feGaussianBlur in="lit" stdDeviation="4" result="b2"/>
+    <feComponentTransfer in="b2" result="a2"><feFuncA type="linear" slope="1.3"/></feComponentTransfer>
+    <feComposite in="color" in2="a2" operator="in" result="g2"/>
+    <feGaussianBlur in="lit" stdDeviation="10" result="b3"/>
+    <feComponentTransfer in="b3" result="a3"><feFuncA type="linear" slope="2"/></feComponentTransfer>
+    <feComposite in="color" in2="a3" operator="in" result="g3"/>
+    <feMerge><feMergeNode in="g3"/><feMergeNode in="g2"/><feMergeNode in="g1"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<g filter="url(#neon-delivery)" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<polygon points="80,30 128,52 80,74 32,52"/>
+<polyline points="32,52 32,106 80,128 80,74"/>
+<polyline points="80,128 128,106 128,52"/>
+<polyline points="56,41 104,63 104,117" stroke-opacity="0.45"/>
+<polygon points="56,82 58.35,88.76 65.51,88.91 59.80,93.24 61.88,100.09 56,96 50.12,100.09 52.20,93.24 46.49,88.91 53.65,88.76"/>
+<line x1="8" y1="72" x2="22" y2="72" stroke-opacity="0.45"/>
+<line x1="4" y1="86" x2="22" y2="86" stroke-opacity="0.45"/>
+<line x1="10" y1="100" x2="22" y2="100" stroke-opacity="0.45"/>
+</g>
+</svg>
