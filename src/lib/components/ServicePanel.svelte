@@ -23,7 +23,7 @@
         onclick={() => (open = !open)}
         class="neon-panel group flex w-full cursor-pointer flex-col gap-3 p-6 text-left"
 >
-    <span class="text-sm text-indigo-400">{number}</span>
+    <span class="neon-number text-sm">{number}</span>
 
     <span class="grid flex-1">
         <span
@@ -66,6 +66,14 @@
 
         /* When the cursor leaves, the tube switches off quickly */
         transition: --glow 0.15s ease-out;
+    }
+
+    /* The number glows like NeonButton text, following the panel's --glow */
+    .neon-number {
+        color: color-mix(in srgb, rgb(224 231 255) calc(var(--glow) * 100%), rgb(129 140 248));
+        text-shadow:
+                0 0 4px rgb(var(--neon) / calc(0.9 * var(--glow))),
+                0 0 12px rgb(var(--neon) / calc(0.5 * var(--glow)));
     }
 
     /* Lit while open (click/tap) or focused with the keyboard... */
