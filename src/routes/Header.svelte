@@ -12,7 +12,7 @@ const motion = (ms: number) =>
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms;
 </script>
 
-<header class="sticky top-0 z-20 mt-2 mb-12 bg-slate-800 py-4 lg:mt-6 lg:py-6">
+<header class="sticky top-0 z-20 mt-2 mb-12 border-b border-white/10 bg-slate-800 py-4 lg:mt-6 lg:py-6">
     <div class="flex justify-between items-center">
         <h1 class="text-2xl sm:text-3xl"><span class="text-indigo-400">SOFT</span>MARMOT</h1>
 
@@ -37,7 +37,7 @@ const motion = (ms: number) =>
     {#if menuOpen}
         <ul
                 id="mobile-nav"
-                class="mobile-nav lg:hidden absolute inset-x-0 top-full z-10 flex flex-col gap-4 bg-slate-800 p-5 text-lg shadow-lg"
+                class="mobile-nav lg:hidden absolute inset-x-0 top-full z-10 -mt-px flex flex-col gap-4 bg-slate-800 p-5 text-lg shadow-lg"
                 in:slide={{ duration: motion(250) }}
                 out:fade={{ duration: motion(150) }}
         >
