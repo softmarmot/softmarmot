@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" width="160" height="160" overflow="visible" aria-hidden="true">
+<defs>
+  <filter id="neon-web-apps" filterUnits="userSpaceOnUse" x="-20" y="-20" width="200" height="200" color-interpolation-filters="sRGB">
+    <feFlood flood-color="rgb(129,140,248)" result="color"/>
+    <feColorMatrix in="SourceGraphic" type="matrix" result="bright" values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0.667 0.667 0.667 0 -0.85"/>
+    <feComposite in="bright" in2="SourceAlpha" operator="in" result="lit"/>
+    <feGaussianBlur in="lit" stdDeviation="1.5" result="b1"/>
+    <feComponentTransfer in="b1" result="a1"><feFuncA type="linear" slope="0.7"/></feComponentTransfer>
+    <feComposite in="color" in2="a1" operator="in" result="g1"/>
+    <feGaussianBlur in="lit" stdDeviation="4" result="b2"/>
+    <feComponentTransfer in="b2" result="a2"><feFuncA type="linear" slope="1.3"/></feComponentTransfer>
+    <feComposite in="color" in2="a2" operator="in" result="g2"/>
+    <feGaussianBlur in="lit" stdDeviation="10" result="b3"/>
+    <feComponentTransfer in="b3" result="a3"><feFuncA type="linear" slope="2"/></feComponentTransfer>
+    <feComposite in="color" in2="a3" operator="in" result="g3"/>
+    <feMerge><feMergeNode in="g3"/><feMergeNode in="g2"/><feMergeNode in="g1"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<g filter="url(#neon-web-apps)" fill="none" stroke="#ffffff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+<rect x="20" y="34" width="120" height="92" rx="6"/>
+<line x1="48" y1="34" x2="48" y2="126"/>
+<line x1="30" y1="50" x2="38" y2="50"/><line x1="30" y1="62" x2="38" y2="62"/><line x1="30" y1="74" x2="38" y2="74"/>
+<rect x="58" y="44" width="34" height="22" rx="3"/>
+<polyline points="67,55 72,60 82,50"/>
+<rect x="100" y="44" width="30" height="22" rx="3"/>
+<line x1="107" y1="52" x2="123" y2="52"/><line x1="107" y1="59" x2="117" y2="59"/>
+<line x1="64" y1="114" x2="64" y2="98"/>
+<line x1="78" y1="114" x2="78" y2="88"/>
+<line x1="92" y1="114" x2="92" y2="102"/>
+<line x1="106" y1="114" x2="106" y2="82"/>
+<line x1="120" y1="114" x2="120" y2="94"/>
+</g>
+</svg>

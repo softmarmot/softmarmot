@@ -23,12 +23,7 @@
 </svelte:element>
 
 <style>
-    /* Registering the variable lets the browser animate it as a number */
-    @property --glow {
-        syntax: '<number>';
-        inherits: true;
-        initial-value: 0;
-    }
+    /* --glow, neon-ignite and neon-hum live in $lib/neon.css */
 
     .neon-button {
         --neon: 129 140 248; /* indigo-400 */
@@ -58,30 +53,6 @@
         animation:
                 neon-ignite 1.1s linear,
                 neon-hum 5s 1.1s linear infinite;
-    }
-
-    /* Start-up sequence: sharp flashes with dark gaps of uneven length */
-    @keyframes neon-ignite {
-        0%   { --glow: 0; }
-        4%   { --glow: 0.9; }
-        5%   { --glow: 0.05; }
-        13%  { --glow: 0.05; }
-        14%  { --glow: 1; }
-        18%  { --glow: 1; }
-        19%  { --glow: 0.15; }
-        21%  { --glow: 0.6; }
-        22%  { --glow: 0; }
-        36%  { --glow: 0; }
-        38%  { --glow: 1; }
-        100% { --glow: 1; }
-    }
-
-    /* Once lit: a steady glow with a rare, tiny dip */
-    @keyframes neon-hum {
-        0%, 61%, 63.5%, 100% { --glow: 1; }
-        62%   { --glow: 0.82; }
-        63%   { --glow: 0.95; }
-        85%   { --glow: 0.97; }
     }
 
     @media (prefers-reduced-motion: reduce) {
