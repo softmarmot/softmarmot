@@ -117,7 +117,7 @@
         }
     }
 
-    /* The number lights up like NeonButton text while the text is showing */
+    /* The number lights up while the text is showing */
     .neon-number {
         --glow: 0;
         color: color-mix(in srgb, rgb(224 231 255) calc(var(--glow) * 100%), rgb(129 140 248));
