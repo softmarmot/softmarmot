@@ -25,11 +25,11 @@
         },
         {
             name: 'First Class Delivery',
-            kind: 'Delivery service',
+            kind: 'Trucking company',
             url: 'https://1stclass.delivery/',
             icon: delivery,
             description:
-                'A clean, modern site for a delivery company, built to earn trust and make it easy to get in touch.'
+                'A modern site for a trucking company that shows shippers what it hauls and makes it easy to request a load.'
         }
     ];
 </script>
