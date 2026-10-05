@@ -1,5 +1,6 @@
 @import url('https://googleapis.com');
 @import 'tailwindcss';
+@import '../lib/neon.css';
 
 @theme {
     --font-kode: "Kode Mono", monospace;
