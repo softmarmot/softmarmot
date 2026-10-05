@@ -21,6 +21,6 @@
     </a>
 
     <div class="mt-8">
-        <NeonButton href="mailto:{email}?subject=New%20project">Send an email →</NeonButton>
+        <NeonButton href="mailto:{email}?subject=New%20project" arrow>Send an email</NeonButton>
     </div>
 </section>

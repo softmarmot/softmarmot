@@ -17,9 +17,7 @@
             We design and build fast, modern websites and custom web applications for small businesses
             and growing companies
         </p>
-        <NeonButton class="self-start" href="#contact">
-            Start a project →
-        </NeonButton>
+        <NeonButton class="self-start" href="#contact" arrow>Start a project</NeonButton>
     </div>
     <div class="flex md:basis-1/2 items-center justify-center">
         <!-- The SVG's viewBox has 30 units of empty padding above and below the drawing (~9% of its height each);
