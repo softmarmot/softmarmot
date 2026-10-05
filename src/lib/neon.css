@@ -1,4 +1,4 @@
-/* Shared neon-tube effect, used by NeonButton and ServicePanel. */
+/* Shared neon-tube effect, used by ServicePanel and the mobile menu. */
 
 /* Registering the variable lets the browser animate it as a number */
 @property --glow {
