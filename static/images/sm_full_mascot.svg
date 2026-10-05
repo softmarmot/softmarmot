@@ -38,22 +38,30 @@
           color-interpolation-filters="sRGB">
   <feFlood flood-color="rgb(129,140,248)" result="color"/>
 
+      <!-- only lit glass glows: alpha from brightness, so dark unlit tubes cast no halo -->
+      <feColorMatrix in="SourceGraphic" type="matrix" result="bright"
+                     values="0 0 0 0 0
+                             0 0 0 0 0
+                             0 0 0 0 0
+                             0.667 0.667 0.667 0 -0.85"/>
+      <feComposite in="bright" in2="SourceAlpha" operator="in" result="lit"/>
+
       <!-- tight halo -->
-      <feGaussianBlur in="SourceAlpha" stdDeviation="1.5" result="b1"/>
+      <feGaussianBlur in="lit" stdDeviation="1.5" result="b1"/>
       <feComponentTransfer in="b1" result="a1">
     <feFuncA type="linear" slope="0.7"/>
   </feComponentTransfer>
       <feComposite in="color" in2="a1" operator="in" result="g1"/>
 
       <!-- medium glow -->
-      <feGaussianBlur in="SourceAlpha" stdDeviation="4" result="b2"/>
+      <feGaussianBlur in="lit" stdDeviation="4" result="b2"/>
       <feComponentTransfer in="b2" result="a2">
     <feFuncA type="linear" slope="1.3"/>
   </feComponentTransfer>
       <feComposite in="color" in2="a2" operator="in" result="g2"/>
 
       <!-- wide soft bloom -->
-      <feGaussianBlur in="SourceAlpha" stdDeviation="10" result="b3"/>
+      <feGaussianBlur in="lit" stdDeviation="10" result="b3"/>
       <feComponentTransfer in="b3" result="a3">
     <feFuncA type="linear" slope="2"/>
   </feComponentTransfer>
@@ -171,14 +179,17 @@
    Opacity, glow size, glow strength and core colour are all derived
    from it, so a dip looks like a tube losing power: the glow collapses
    first and the white-hot core cools toward the gas colour.
+   With no power a tube is still there: dark, unlit glass (--glass).
    ========================================================= */
 
 @property --lit { syntax: "<number>"; inherits: true; initial-value: 1; }  /* per-section flicker */
 @property --sag { syntax: "<number>"; inherits: true; initial-value: 1; }  /* whole-sign brownout */
 @property --hum { syntax: "<number>"; inherits: true; initial-value: 1; }  /* constant faint shimmer */
+@property --on  { syntax: "<number>"; inherits: true; initial-value: 1; }  /* per-segment power-on */
 
 #SoftMarmot {
     --glow: 129 140 248;                 /* glow colour as R G B */
+    --glass: #4b4f66;                    /* unlit tube */
     animation:
         hum 2.3s linear infinite,
         brownout 23s linear 3.5s infinite;
@@ -187,7 +198,6 @@
 /* shared look for every tube section (filter lives on 4 groups, not ~25 paths) */
 #head, #hand-left, #hand-right, #bottom {
     --p: calc(var(--lit) * var(--sag));
-    opacity: calc((0.1 + 0.9 * var(--p)) * var(--hum));
     filter: url(#neon);
 }
 
@@ -197,10 +207,14 @@
 #hand-left  { --t0: 0.9s; animation: neon-faulty   9s    linear 3.5s infinite; }
 #bottom     { --t0: 1.3s; animation: neon-stable   13.1s linear 3.5s infinite; }
 
-/* every path is its own tube segment: white-hot core that tints toward the glow colour when dim */
+/* every path is its own tube segment: white-hot core that tints toward the glow colour when dim,
+   and falls back to dark glass as power drops out */
 #SoftMarmot path {
+    --light: calc(var(--on) * var(--p) * var(--hum));
     fill: none;
-    stroke: color-mix(in srgb, #fff calc(var(--p) * 100%), rgb(var(--glow))) !important;
+    stroke: color-mix(in srgb,
+        color-mix(in srgb, #fff calc(var(--p) * 100%), rgb(var(--glow))) calc(var(--light) * 100%),
+        var(--glass)) !important;
     stroke-linecap: round;
     stroke-linejoin: round;
     animation: strike 1.4s linear both;
@@ -211,21 +225,21 @@
 
 
 /* =========================================================
-   POWER-ON: each segment stutters on instead of fading in
+   POWER-ON: each segment starts as dark glass and stutters on
    ========================================================= */
 @keyframes strike {
-    0%, 12% { opacity: 0; }
-    14%     { opacity: 0.9; }
-    18%     { opacity: 0; }
-    30%     { opacity: 0; }
-    32%     { opacity: 0.6; }
-    36%     { opacity: 0.15; }
-    40%     { opacity: 0.85; }
-    44%     { opacity: 0; }
-    60%     { opacity: 0; }
-    62%     { opacity: 0.7; }
-    66%     { opacity: 0.4; }
-    72%, 100% { opacity: 1; }
+    0%, 12% { --on: 0; }
+    14%     { --on: 0.9; }
+    18%     { --on: 0; }
+    30%     { --on: 0; }
+    32%     { --on: 0.6; }
+    36%     { --on: 0.15; }
+    40%     { --on: 0.85; }
+    44%     { --on: 0; }
+    60%     { --on: 0; }
+    62%     { --on: 0.7; }
+    66%     { --on: 0.4; }
+    72%, 100% { --on: 1; }
 }
 
 
