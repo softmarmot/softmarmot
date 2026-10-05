@@ -12,7 +12,7 @@ const motion = (ms: number) =>
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : ms;
 </script>
 
-<header class="relative mt-6 mb-12 lg:mt-12">
+<header class="sticky top-0 z-20 mt-2 mb-12 bg-slate-800 py-4 lg:mt-6 lg:py-6">
     <div class="flex justify-between items-center">
         <h1 class="text-2xl sm:text-3xl"><span class="text-indigo-400">SOFT</span>MARMOT</h1>
 
@@ -37,7 +37,7 @@ const motion = (ms: number) =>
     {#if menuOpen}
         <ul
                 id="mobile-nav"
-                class="mobile-nav lg:hidden absolute inset-x-0 top-full z-10 mt-4 flex flex-col gap-4 bg-slate-800 p-5 text-lg shadow-lg"
+                class="mobile-nav lg:hidden absolute inset-x-0 top-full z-10 flex flex-col gap-4 bg-slate-800 p-5 text-lg shadow-lg"
                 in:slide={{ duration: motion(250) }}
                 out:fade={{ duration: motion(150) }}
         >
@@ -51,7 +51,7 @@ const motion = (ms: number) =>
 <style>
     /*
         Mobile menu: the panel drops down and its border ignites like a neon tube,
-        then each item's "#" lights up one after another.
+        then the items slide in one after another.
         --glow, neon-ignite and neon-hum live in $lib/neon.css
     */
     .mobile-nav {
@@ -69,10 +69,7 @@ const motion = (ms: number) =>
     }
 
     .mobile-nav :global(li) {
-        --glow: 0;
-        animation:
-                nav-item-in 0.3s ease-out both,
-                neon-ignite 0.9s linear both;
+        animation: nav-item-in 0.3s ease-out both;
     }
 
     .mobile-nav :global(li:nth-child(1)) { animation-delay: 0.15s; }
@@ -80,13 +77,6 @@ const motion = (ms: number) =>
     .mobile-nav :global(li:nth-child(3)) { animation-delay: 0.35s; }
     .mobile-nav :global(li:nth-child(4)) { animation-delay: 0.45s; }
     .mobile-nav :global(li:nth-child(5)) { animation-delay: 0.55s; }
-
-    /* The "#" in front of each item is the tube that lights up */
-    .mobile-nav :global(li a > span:first-child) {
-        text-shadow:
-                0 0 4px rgb(var(--neon) / calc(0.9 * var(--glow))),
-                0 0 12px rgb(var(--neon) / calc(0.5 * var(--glow)));
-    }
 
     @keyframes nav-item-in {
         from {
@@ -111,9 +101,12 @@ const motion = (ms: number) =>
     }
 
     @media (prefers-reduced-motion: reduce) {
-        .mobile-nav,
-        .mobile-nav :global(li) {
+        .mobile-nav {
             --glow: 1;
+            animation: none;
+        }
+
+        .mobile-nav :global(li) {
             animation: none;
         }
     }

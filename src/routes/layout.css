@@ -2,6 +2,11 @@
 @import 'tailwindcss';
 @import '../lib/neon.css';
 
+/* Keep anchor targets (#services, #about, ...) clear of the sticky header */
+html {
+    scroll-padding-top: 5.25rem;
+}
+
 @theme {
     --font-kode: "Kode Mono", monospace;
 }
