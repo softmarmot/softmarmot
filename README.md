@@ -32,40 +32,6 @@ npm run dev -- --open  # same, and open it in the browser
 | `npm run check`       | Type-check the project with `svelte-check`      |
 | `npm run check:watch` | Same, in watch mode                             |
 
-## Project structure
-
-```
-src/
-├── app.html                 # HTML shell (dark slate background, Kode Mono)
-├── lib/
-│   ├── neon.css             # Shared neon-tube effect (--glow, neon-ignite, neon-hum)
-│   ├── assets/
-│   │   ├── services/*.svg   # Service icons, inlined with ?raw
-│   │   └── work/*.webp      # Homepage screenshots of client sites (1200×750)
-│   └── components/
-│       ├── Mascot.svelte        # The neon marmot (static/images/sm_full_mascot.svg)
-│       ├── NavItem.svelte       # Header navigation link
-│       ├── NeonButton.svelte    # Call-to-action button
-│       ├── SectionTitle.svelte  # "# label" + heading used by every section
-│       ├── ServicePanel.svelte  # One service card with a lighting-up icon
-│       └── WorkCard.svelte      # One portfolio card linking to the live site
-└── routes/
-    ├── +layout.svelte       # Page frame: Header, <main>, Footer
-    ├── +layout.ts           # prerender = true
-    ├── +page.svelte         # Hero, then the sections below
-    ├── layout.css           # Tailwind import, theme font, anchor scroll offset
-    ├── Header.svelte        # Sticky header, desktop nav and mobile menu
-    ├── Services.svelte      # #services
-    ├── Work.svelte          # #work
-    ├── About.svelte         # #about
-    ├── Contact.svelte       # #contact
-    └── Footer.svelte
-static/
-├── images/sm_full_mascot.svg
-├── robots.txt
-└── .nojekyll                # Lets GitHub Pages serve the _app/ folder
-```
-
 ## Page sections
 
 The site is one page; the header links jump to each section by its id.
