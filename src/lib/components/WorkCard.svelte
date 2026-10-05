@@ -4,16 +4,16 @@
         name,
         kind,
         url,
-        icon,
+        image,
         description
-    }: { number: string; name: string; kind: string; url: string; icon: string; description: string } = $props();
+    }: { number: string; name: string; kind: string; url: string; image: string; description: string } = $props();
 
     const domain = $derived(new URL(url).hostname);
 </script>
 
 <!--
     The whole card is one link to the live site.
-    Top: a browser window showing the site's address and a neon icon for the business.
+    Top: a browser window showing the site's address and a screenshot of the homepage.
     Bottom: name, kind of business and a short description.
     Stacked on phones and in the 3-column grid; side by side on tablet widths, where the card is a full-width row.
 -->
@@ -39,11 +39,16 @@
             <span class="truncate text-xs text-gray-500">{domain}</span>
         </span>
 
-        <span class="screen grid flex-1 place-items-center py-8">
-            <span class="block size-24 transition-transform duration-300 sm:size-28 pointer-fine:group-hover:scale-105">
-                {@html icon}
-            </span>
-        </span>
+        <img
+                src={image}
+                alt=""
+                width="1200"
+                height="750"
+                loading="lazy"
+                decoding="async"
+                class="block aspect-[16/10] w-full object-cover object-top opacity-80 transition-opacity duration-300
+                    group-hover:opacity-100 group-focus-visible:opacity-100 sm:max-lg:aspect-auto sm:max-lg:min-h-0 sm:max-lg:flex-1"
+        />
     </span>
 
     <span class="flex flex-1 flex-col gap-2 p-6 sm:max-lg:basis-1/2">
@@ -62,17 +67,3 @@
         </span>
     </span>
 </a>
-
-<style>
-    .screen :global(svg) {
-        width: 100%;
-        height: 100%;
-    }
-
-    /* Faint dot grid behind the icon, like an empty canvas */
-    .screen {
-        background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
-        background-size: 16px 16px;
-        background-position: center;
-    }
-</style>

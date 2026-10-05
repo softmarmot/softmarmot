@@ -2,34 +2,34 @@
     import SectionTitle from '$lib/components/SectionTitle.svelte';
     import WorkCard from '$lib/components/WorkCard.svelte';
 
-    import repair from '$lib/assets/work/repair.svg?raw';
-    import trucking from '$lib/assets/work/trucking.svg?raw';
-    import delivery from '$lib/assets/work/delivery.svg?raw';
+    import hartville from '$lib/assets/work/hartville.webp';
+    import wdm from '$lib/assets/work/wdm.webp';
+    import firstClass from '$lib/assets/work/1stclass.webp';
 
     const projects = [
         {
             name: 'Hartville Electronics Repair',
             kind: 'Electronics repair shop',
             url: 'https://hartvilleelectronicsrepair.com/',
-            icon: repair,
+            image: hartville,
             description:
-                'A fast, mobile-friendly site for a local repair shop, so customers can see what gets fixed and get in touch quickly.'
+                'A clean, photo-led site for a local shop that repairs phones, tablets, laptops and gaming consoles, with every service a tap away.'
         },
         {
             name: 'WDM Express',
             kind: 'Trucking company',
             url: 'https://wdm.express/',
-            icon: trucking,
+            image: wdm,
             description:
-                'A company website for a freight carrier that presents the business clearly to shippers and brokers.'
+                'A dark, cinematic one-pager for a box-truck carrier serving the USA and Canada, covering its fleet, drivers, routes and careers.'
         },
         {
             name: 'First Class Delivery',
             kind: 'Trucking company',
             url: 'https://1stclass.delivery/',
-            icon: delivery,
+            image: firstClass,
             description:
-                'A modern site for a trucking company that shows shippers what it hauls and makes it easy to request a load.'
+                'A bright, road-themed site for a carrier running routes across North America, introducing its fleet and hiring drivers.'
         }
     ];
 </script>
