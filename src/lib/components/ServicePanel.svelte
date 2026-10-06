@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { fullyVisible } from '$lib/fullyVisible';
+
     let {
         number,
         label,
@@ -8,22 +10,30 @@
     }: { number: string; label: string; icon: string; title: string; description: string } = $props();
 
     let open = $state(false);
-    // Becomes true the first time the panel scrolls into view; that is when the icon first lights up
+
+    // Every panel (and every re-ignition) gets its own start-up pattern, delay, speed and hum,
+    // so panels lighting up together don't flicker in sync. Set on the client only, to keep SSR stable.
+    const IGNITIONS = ['neon-ignite', 'neon-ignite-stutter', 'neon-ignite-slow'];
+    let tube = $state('');
+
+    // `first` uses the panel's position, so panels revealed side by side never start with the same pattern
+    function reroll(first = false) {
+        const between = (min: number, max: number) => (min + Math.random() * (max - min)).toFixed(2);
+        const ignition = first
+            ? IGNITIONS[(parseInt(number) - 1) % IGNITIONS.length]
+            : IGNITIONS[Math.floor(Math.random() * IGNITIONS.length)];
+        tube = [
+            `--ignite: ${ignition}`,
+            `--ignite-delay: ${between(0, 0.45)}s`,
+            `--ignite-duration: ${between(0.9, 1.5)}s`,
+            `--hum-duration: ${between(4, 7.5)}s`
+        ].join('; ');
+    }
+
+    $effect(() => reroll(true));
+    // Becomes true the first time the whole panel is on screen; that is when the icon first lights up
     let seen = $state(false);
 
-    function revealOnScroll(node: HTMLElement) {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    seen = true;
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.5 }
-        );
-        observer.observe(node);
-        return () => observer.disconnect();
-    }
 </script>
 
 <!--
@@ -36,11 +46,15 @@
 <button
         type="button"
         aria-expanded={open}
-        onclick={() => (open = !open)}
+        onclick={() => {
+            reroll();
+            open = !open;
+        }}
+        onmouseenter={() => reroll()}
         class="panel group flex w-full cursor-pointer flex-col gap-3 border border-white/10 p-6 text-left outline-none transition-colors duration-300
             hover:border-indigo-400/60 focus-visible:border-indigo-400/60 aria-expanded:border-indigo-400/60"
         class:seen
-        {@attach revealOnScroll}
+        {@attach fullyVisible(() => (seen = true))}
 >
     <span class="neon-number text-sm">{number}</span>
 
@@ -49,7 +63,7 @@
                 aria-hidden="true"
                 class="col-start-1 row-start-1 flex flex-col items-center justify-center gap-3 py-4"
         >
-            <span class="neon-icon size-24 sm:size-28">{@html icon}</span>
+            <span class="neon-icon size-24 sm:size-28" style={tube}>{@html icon}</span>
             <span
                     class="text-xl font-medium transition duration-300
                         group-aria-expanded:-translate-y-2 group-aria-expanded:opacity-0
@@ -71,7 +85,7 @@
 </button>
 
 <style>
-    /* --glow, neon-ignite and neon-hum live in $lib/neon.css */
+    /* --glow, --on and the neon-* keyframes live in $lib/neon.css */
 
     .panel {
         --neon: 129 140 248; /* indigo-400 */
@@ -92,26 +106,42 @@
         height: 100%;
     }
 
-    .neon-icon :global(svg > g) {
-        stroke: color-mix(in srgb, rgb(255 255 255) calc(var(--glow) * 100%), rgb(71 85 105));
+    /* Each shape in the icon is its own tube segment: lit by the icon's --glow and by its own --on */
+    .neon-icon :global(svg > g > *) {
+        stroke: color-mix(in srgb, rgb(255 255 255) calc(var(--glow) * var(--on) * 100%), rgb(71 85 105));
     }
 
     /* First time in view, and every time the text is hidden again: flicker on */
     .panel.seen .neon-icon {
         --glow: 1;
         animation:
-                neon-ignite 1.1s linear,
-                neon-hum 5s 1.1s linear infinite;
+                var(--ignite, neon-ignite) var(--ignite-duration, 1.1s) linear var(--ignite-delay, 0s) both,
+                neon-hum var(--hum-duration, 5s) linear calc(var(--ignite-delay, 0s) + var(--ignite-duration, 1.1s)) infinite;
+    }
+
+    .panel.seen .neon-icon :global(svg > g > *) {
+        animation: neon-strike var(--ignite-duration, 1.1s) linear both;
+        animation-delay: var(--ignite-delay, 0s);
+    }
+
+    .panel.seen .neon-icon :global(svg > g > :nth-child(3n + 2)) {
+        animation-delay: calc(var(--ignite-delay, 0s) + 0.12s);
+    }
+
+    .panel.seen .neon-icon :global(svg > g > :nth-child(3n)) {
+        animation-delay: calc(var(--ignite-delay, 0s) + 0.25s);
     }
 
     /* Text showing: tubes switch off (hover only where a real hover exists) */
-    .panel.seen[aria-expanded='true'] .neon-icon {
+    .panel.seen[aria-expanded='true'] .neon-icon,
+    .panel.seen[aria-expanded='true'] .neon-icon :global(svg > g > *) {
         --glow: 0;
         animation: none;
     }
 
     @media (pointer: fine) {
-        .panel.seen:hover .neon-icon {
+        .panel.seen:hover .neon-icon,
+        .panel.seen:hover .neon-icon :global(svg > g > *) {
             --glow: 0;
             animation: none;
         }
@@ -146,6 +176,7 @@
 
     @media (prefers-reduced-motion: reduce) {
         .neon-icon,
+        .neon-icon :global(svg > g > *),
         .neon-number {
             animation: none !important;
         }
