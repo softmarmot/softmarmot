@@ -8,18 +8,27 @@
     }: { number: string; label: string; icon: string; title: string; description: string } = $props();
 
     let open = $state(false);
-    // Becomes true the first time the panel scrolls into view; that is when the icon first lights up
+    // Becomes true the first time the whole panel is on screen; that is when the icon first lights up
     let seen = $state(false);
+
+    // The sticky header covers the top of the viewport, so a panel under it doesn't count as visible
+    const HEADER_HEIGHT = 84;
 
     function revealOnScroll(node: HTMLElement) {
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting) {
+                const visible = entry.intersectionRect.height;
+                const viewport = entry.rootBounds?.height ?? window.innerHeight;
+                // Fully visible, or filling the whole viewport if the panel is taller than it
+                if (visible >= Math.min(entry.boundingClientRect.height, viewport) - 1) {
                     seen = true;
                     observer.disconnect();
                 }
             },
-            { threshold: 0.5 }
+            {
+                rootMargin: `-${HEADER_HEIGHT}px 0px 0px 0px`,
+                threshold: Array.from({ length: 21 }, (_, i) => i / 20)
+            }
         );
         observer.observe(node);
         return () => observer.disconnect();
