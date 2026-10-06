@@ -23,6 +23,53 @@
     100% { --glow: 1; }
 }
 
+/* Two more start-up variants, so neighbouring tubes don't flicker in sync */
+@keyframes neon-ignite-stutter {
+    0%   { --glow: 0; }
+    8%   { --glow: 0; }
+    10%  { --glow: 0.7; }
+    12%  { --glow: 0.1; }
+    16%  { --glow: 0.85; }
+    18%  { --glow: 0.3; }
+    20%  { --glow: 0.9; }
+    23%  { --glow: 0; }
+    44%  { --glow: 0; }
+    46%  { --glow: 0.5; }
+    48%  { --glow: 0.1; }
+    51%  { --glow: 1; }
+    100% { --glow: 1; }
+}
+
+@keyframes neon-ignite-slow {
+    0%   { --glow: 0; }
+    20%  { --glow: 0; }
+    22%  { --glow: 0.4; }
+    30%  { --glow: 0.35; }
+    31%  { --glow: 0; }
+    52%  { --glow: 0; }
+    54%  { --glow: 1; }
+    57%  { --glow: 0.2; }
+    60%  { --glow: 1; }
+    100% { --glow: 1; }
+}
+
+/* Per-segment power: lets the parts of one sign catch at slightly different moments */
+@property --on {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 1;
+}
+
+@keyframes neon-strike {
+    0%, 10% { --on: 0; }
+    14%     { --on: 0.9; }
+    20%     { --on: 0; }
+    34%     { --on: 0; }
+    38%     { --on: 0.7; }
+    44%     { --on: 0.2; }
+    52%, 100% { --on: 1; }
+}
+
 /* Once lit: a steady glow with a rare, tiny dip */
 @keyframes neon-hum {
     0%, 61%, 63.5%, 100% { --glow: 1; }
