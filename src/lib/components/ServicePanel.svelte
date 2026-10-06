@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { fullyVisible } from '$lib/fullyVisible';
+
     let {
         number,
         label,
@@ -11,28 +13,6 @@
     // Becomes true the first time the whole panel is on screen; that is when the icon first lights up
     let seen = $state(false);
 
-    // The sticky header covers the top of the viewport, so a panel under it doesn't count as visible
-    const HEADER_HEIGHT = 84;
-
-    function revealOnScroll(node: HTMLElement) {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                const visible = entry.intersectionRect.height;
-                const viewport = entry.rootBounds?.height ?? window.innerHeight;
-                // Fully visible, or filling the whole viewport if the panel is taller than it
-                if (visible >= Math.min(entry.boundingClientRect.height, viewport) - 1) {
-                    seen = true;
-                    observer.disconnect();
-                }
-            },
-            {
-                rootMargin: `-${HEADER_HEIGHT}px 0px 0px 0px`,
-                threshold: Array.from({ length: 21 }, (_, i) => i / 20)
-            }
-        );
-        observer.observe(node);
-        return () => observer.disconnect();
-    }
 </script>
 
 <!--
@@ -49,7 +29,7 @@
         class="panel group flex w-full cursor-pointer flex-col gap-3 border border-white/10 p-6 text-left outline-none transition-colors duration-300
             hover:border-indigo-400/60 focus-visible:border-indigo-400/60 aria-expanded:border-indigo-400/60"
         class:seen
-        {@attach revealOnScroll}
+        {@attach fullyVisible(() => (seen = true))}
 >
     <span class="neon-number text-sm">{number}</span>
 

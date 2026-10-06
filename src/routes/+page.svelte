@@ -7,8 +7,8 @@
     import Contact from './Contact.svelte';
 </script>
 
-<section id="home" class="scroll-mt-8 flex flex-col gap-10 py-8 md:flex-row md:gap-8 md:py-12">
-    <div class="flex md:basis-1/2 flex-col gap-4 justify-between">
+<section id="home" class="scroll-mt-8 flex flex-col gap-16 py-8 md:flex-row md:gap-8 md:py-12">
+    <div class="flex md:basis-1/2 flex-col gap-8 md:gap-4 justify-between">
         <h1 class="text-3xl sm:text-4xl lg:text-5xl font-medium">
             <span class="text-indigo-400">Websites</span> for businesses that want to be
             <span class="text-indigo-400">taken seriously</span>
