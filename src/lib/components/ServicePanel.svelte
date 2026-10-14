@@ -34,11 +34,25 @@
     // Becomes true the first time the whole panel is on screen; that is when the icon first lights up
     let seen = $state(false);
 
+    // Mouse users get hover only: a click must not pin the panel open (it would stay flipped after the
+    // mouse leaves). Taps, pens and keyboard (Enter/Space) still toggle. Browsers whose click event
+    // carries no pointerType fall back to the primary pointer; keyboard clicks have detail 0.
+    function toggle(event: MouseEvent) {
+        const type = (event as PointerEvent).pointerType;
+        const mouse = type ? type === 'mouse' : event.detail > 0 && matchMedia('(pointer: fine)').matches;
+        if (mouse) {
+            open = false;
+            return;
+        }
+        reroll();
+        open = !open;
+    }
+
 </script>
 
 <!--
     Front: neon icon + short label. Back: the full title and description.
-    Flips on hover with a mouse, or on click/tap/Enter on any device (toggles).
+    Flips on hover with a mouse (clicks do nothing), or on tap/Enter (toggles).
     When flipped, the icon's tubes switch off and stay visible behind the text;
     when it flips back, they flicker on again.
     Both faces share one grid cell, so the panel is as tall as the longer face.
@@ -46,10 +60,7 @@
 <button
         type="button"
         aria-expanded={open}
-        onclick={() => {
-            reroll();
-            open = !open;
-        }}
+        onclick={toggle}
         onmouseenter={() => reroll()}
         class="panel group flex w-full cursor-pointer flex-col gap-3 border border-white/10 p-6 text-left outline-none transition-colors duration-300
             hover:border-indigo-400/60 focus-visible:border-indigo-400/60 aria-expanded:border-indigo-400/60"
