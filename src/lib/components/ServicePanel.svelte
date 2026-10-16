@@ -35,11 +35,15 @@
     let seen = $state(false);
 
     // Mouse users get hover only: a click must not pin the panel open (it would stay flipped after the
-    // mouse leaves). Taps, pens and keyboard (Enter/Space) still toggle. Browsers whose click event
-    // carries no pointerType fall back to the primary pointer; keyboard clicks have detail 0.
+    // mouse leaves). Taps, pens and keyboard (Enter/Space) still toggle.
+    // The pointer type comes from pointerdown, not from the click: iOS Safari reports taps' clicks as
+    // pointerType "mouse". Phones and tablets (no real hover) always toggle; keyboard clicks have detail 0.
+    let pointer = '';
+
     function toggle(event: MouseEvent) {
-        const type = (event as PointerEvent).pointerType;
-        const mouse = type ? type === 'mouse' : event.detail > 0 && matchMedia('(pointer: fine)').matches;
+        const hover = matchMedia('(hover: hover) and (pointer: fine)').matches;
+        const mouse = event.detail > 0 && hover && (pointer ? pointer === 'mouse' : true);
+        pointer = '';
         if (mouse) {
             open = false;
             return;
@@ -60,6 +64,7 @@
 <button
         type="button"
         aria-expanded={open}
+        onpointerdown={(e) => (pointer = e.pointerType)}
         onclick={toggle}
         onmouseenter={() => reroll()}
         class="panel group flex w-full cursor-pointer flex-col gap-3 border border-white/10 p-6 text-left outline-none transition-colors duration-300
