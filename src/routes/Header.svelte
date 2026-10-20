@@ -15,7 +15,11 @@ const motion = (ms: number) =>
 
 <header class="sticky top-0 z-20 mb-12 border-b border-white/10 bg-slate-800 py-4 lg:py-6">
     <div class="flex justify-between items-center">
-        <h1 class="text-2xl sm:text-3xl"><span class="text-indigo-400">SOFT</span>MARMOT</h1>
+        <h1 class="text-2xl sm:text-3xl">
+            <a href="#home" aria-label="SoftMarmot, back to top" onclick={() => (menuOpen = false)}>
+                <span class="text-indigo-400">SOFT</span>MARMOT
+            </a>
+        </h1>
 
         <ul class="hidden lg:flex gap-8 text-lg">
             {#each items as item (item)}
