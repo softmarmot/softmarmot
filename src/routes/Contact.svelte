@@ -8,7 +8,7 @@
 <section id="contact" class="scroll-mt-8 py-8 md:py-12">
     <SectionTitle label="contact">Have a project in mind?</SectionTitle>
 
-    <p class="mt-6 max-w-2xl leading-relaxed text-gray-400">
+    <p class="mt-6 max-w-2xl font-plex leading-relaxed text-slate-400">
         Tell us a little about your business and what you need. We'll get back to you with next steps
         and a rough estimate.
     </p>
@@ -21,6 +21,6 @@
     </a>
 
     <div class="mt-8">
-        <NeonButton href="mailto:{email}?subject=New%20project">Send an email →</NeonButton>
+        <NeonButton primary href="mailto:{email}?subject=New%20project">Send an email →</NeonButton>
     </div>
 </section>

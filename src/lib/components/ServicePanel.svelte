@@ -67,7 +67,7 @@
         onpointerdown={(e) => (pointer = e.pointerType)}
         onclick={toggle}
         onmouseenter={() => reroll()}
-        class="panel group flex w-full cursor-pointer flex-col gap-3 border border-white/10 p-6 text-left outline-none transition-colors duration-300
+        class="panel group flex w-full cursor-pointer flex-col gap-3 border border-white/15 p-6 text-left outline-none transition-colors duration-300
             hover:border-indigo-400/60 focus-visible:border-indigo-400/60 aria-expanded:border-indigo-400/60"
         class:seen
         {@attach fullyVisible(() => (seen = true))}
@@ -95,7 +95,7 @@
                     pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100"
         >
             <span class="block text-xl font-medium">{title}</span>
-            <span class="mt-3 block leading-relaxed text-gray-400">{description}</span>
+            <span class="mt-3 block font-plex leading-relaxed text-slate-400">{description}</span>
         </span>
     </span>
 </button>
@@ -166,7 +166,7 @@
     /* The number lights up while the text is showing */
     .neon-number {
         --glow: 0;
-        color: color-mix(in srgb, rgb(224 231 255) calc(var(--glow) * 100%), rgb(129 140 248));
+        color: color-mix(in srgb, rgb(224 231 255) calc(var(--glow) * 100%), rgb(163 179 255)); /* indigo-300 at rest, readable at 14px */
         text-shadow:
                 0 0 4px rgb(var(--neon) / calc(0.9 * var(--glow))),
                 0 0 12px rgb(var(--neon) / calc(0.5 * var(--glow)));
