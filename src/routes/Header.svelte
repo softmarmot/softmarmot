@@ -13,13 +13,13 @@ const motion = (ms: number) =>
 
 <svelte:window onkeydown={(e) => { if (e.key === 'Escape') menuOpen = false; }} />
 
-<header class="sticky top-0 z-20 mb-12 border-b border-white/10 bg-slate-800 py-4 lg:py-6">
+<header class="sticky top-0 z-20 mb-12 border-b border-white/15 bg-slate-800 py-4 lg:py-6">
     <div class="flex justify-between items-center">
-        <h1 class="text-2xl sm:text-3xl">
+        <div class="text-2xl sm:text-3xl">
             <a href="#home" aria-label="SoftMarmot, back to top" onclick={() => (menuOpen = false)}>
                 <span class="text-indigo-400">SOFT</span>MARMOT
             </a>
-        </h1>
+        </div>
 
         <ul class="hidden lg:flex gap-8 text-lg">
             {#each items as item (item)}
@@ -70,7 +70,7 @@ const motion = (ms: number) =>
         --neon: 129 140 248; /* indigo-400 */
 
         border: 1px solid
-        color-mix(in srgb, rgb(199 210 254) calc(var(--glow) * 100%), rgb(255 255 255 / 0.1));
+        color-mix(in srgb, rgb(199 210 254) calc(var(--glow) * 100%), rgb(255 255 255 / 0.15));
         box-shadow:
                 0 0 4px rgb(var(--neon) / calc(0.6 * var(--glow))),
                 0 0 16px rgb(var(--neon) / calc(0.3 * var(--glow))),

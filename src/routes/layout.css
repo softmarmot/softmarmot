@@ -1,5 +1,6 @@
-@import url('https://googleapis.com');
 @import 'tailwindcss';
+@import '@fontsource-variable/kode-mono';
+@import '@fontsource-variable/ibm-plex-sans';
 @import '../lib/neon.css';
 
 /* Keep anchor targets (#services, #about, ...) clear of the sticky header */
@@ -8,7 +9,9 @@ html {
 }
 
 @theme {
-    --font-kode: "Kode Mono", monospace;
+    /* Self-hosted: Kode Mono for headings, labels and UI; IBM Plex Sans for longer paragraphs */
+    --font-kode: "Kode Mono Variable", monospace;
+    --font-plex: "IBM Plex Sans Variable", system-ui, sans-serif;
 }
 
 @media (prefers-reduced-motion: no-preference) {

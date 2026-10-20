@@ -21,22 +21,22 @@
         href={url}
         target="_blank"
         rel="noopener"
-        class="group flex h-full w-full flex-col border border-white/10 outline-none transition-colors duration-300
+        class="group flex h-full w-full flex-col border border-white/15 outline-none transition-colors duration-300
             hover:border-indigo-400/60 focus-visible:border-indigo-400/60 sm:max-lg:flex-row"
 >
     <span
             aria-hidden="true"
-            class="flex flex-col border-b border-white/10 transition-colors duration-300
+            class="flex flex-col border-b border-white/15 transition-colors duration-300
                 group-hover:border-indigo-400/60 group-focus-visible:border-indigo-400/60
                 sm:max-lg:basis-1/2 sm:max-lg:border-r sm:max-lg:border-b-0"
     >
-        <span class="flex items-center gap-3 border-b border-white/10 px-4 py-2.5">
+        <span class="flex items-center gap-3 border-b border-white/15 px-4 py-2.5">
             <span class="flex shrink-0 gap-1.5">
                 <span class="size-2 rounded-full border border-white/25"></span>
                 <span class="size-2 rounded-full border border-white/25"></span>
                 <span class="size-2 rounded-full border border-white/25"></span>
             </span>
-            <span class="truncate text-xs text-gray-500">{domain}</span>
+            <span class="truncate text-xs text-slate-400">{domain}</span>
         </span>
 
         <img
@@ -46,17 +46,17 @@
                 height="750"
                 loading="lazy"
                 decoding="async"
-                class="block aspect-[16/10] w-full object-cover object-top opacity-80 transition-opacity duration-300
-                    group-hover:opacity-100 group-focus-visible:opacity-100 sm:max-lg:aspect-auto sm:max-lg:min-h-0 sm:max-lg:flex-1"
+                class="block aspect-[16/10] w-full object-cover object-top pointer-fine:opacity-80 transition-opacity duration-300
+                    pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-visible:opacity-100 sm:max-lg:aspect-auto sm:max-lg:min-h-0 sm:max-lg:flex-1"
         />
     </span>
 
     <span class="flex flex-1 flex-col gap-2 p-6 sm:max-lg:basis-1/2">
-        <span aria-hidden="true" class="text-sm text-indigo-400">{number}</span>
+        <span aria-hidden="true" class="text-sm text-indigo-300">{number}</span>
         <span class="text-xl font-medium">{name}</span>
-        <span class="text-sm text-gray-500">{kind}</span>
-        <span class="mt-2 leading-relaxed text-gray-400">{description}</span>
-        <span class="mt-auto pt-4 text-indigo-400 transition-colors duration-300 group-hover:text-indigo-300">
+        <span class="text-sm text-slate-400">{kind}</span>
+        <span class="mt-2 font-plex leading-relaxed text-slate-400">{description}</span>
+        <span class="mt-auto pt-4 text-indigo-300 transition-colors duration-300 group-hover:text-indigo-200">
             Visit site
             <span
                     aria-hidden="true"
