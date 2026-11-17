@@ -5,8 +5,17 @@
         kind,
         url,
         image,
+        alt,
         description
-    }: { number: string; name: string; kind: string; url: string; image: string; description: string } = $props();
+    }: {
+        number: string;
+        name: string;
+        kind: string;
+        url: string;
+        image: string;
+        alt: string;
+        description: string;
+    } = $props();
 
     const domain = $derived(new URL(url).hostname);
 </script>
@@ -25,12 +34,11 @@
             hover:border-indigo-400/60 focus-visible:border-indigo-400/60 sm:max-lg:flex-row"
 >
     <span
-            aria-hidden="true"
             class="flex flex-col border-b border-white/15 transition-colors duration-300
                 group-hover:border-indigo-400/60 group-focus-visible:border-indigo-400/60
                 sm:max-lg:basis-1/2 sm:max-lg:border-r sm:max-lg:border-b-0"
     >
-        <span class="flex items-center gap-3 border-b border-white/15 px-4 py-2.5">
+        <span aria-hidden="true" class="flex items-center gap-3 border-b border-white/15 px-4 py-2.5">
             <span class="flex shrink-0 gap-1.5">
                 <span class="size-2 rounded-full border border-white/25"></span>
                 <span class="size-2 rounded-full border border-white/25"></span>
@@ -41,7 +49,7 @@
 
         <img
                 src={image}
-                alt=""
+                {alt}
                 width="1200"
                 height="750"
                 loading="lazy"

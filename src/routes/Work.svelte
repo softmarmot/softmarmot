@@ -12,6 +12,7 @@
             kind: 'Electronics repair shop',
             url: 'https://hartvilleelectronicsrepair.com/',
             image: hartville,
+            alt: 'Hartville Electronics Repair website home page',
             description:
                 'A clean, photo-led site for a local shop that repairs phones, tablets, laptops and gaming consoles, with every service a tap away.'
         },
@@ -20,14 +21,16 @@
             kind: 'Trucking company',
             url: 'https://wdm.express/',
             image: wdm,
+            alt: 'WDM Express website home page',
             description:
-                'A dark, cinematic one-pager for a box-truck carrier serving the USA and Canada, covering its fleet, drivers, routes and careers.'
+                'Launch and support for a box-truck carrier serving the USA and Canada: fast static site, quote and driver application forms, privacy and SMS compliance, Google Workspace email.'
         },
         {
             name: 'First Class Delivery',
             kind: 'Trucking company',
             url: 'https://1stclass.delivery/',
             image: firstClass,
+            alt: 'First Class Delivery website home page',
             description:
                 'A bright, road-themed site for a carrier running routes across North America, introducing its fleet and hiring drivers.'
         }
